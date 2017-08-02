@@ -15,42 +15,70 @@ public class Game {
 
     public static void main(String[] args) {
         boolean quit = false;
-        Scanner scanner = new Scanner(System.in);
+        Player player = new Player();
         RpsAi ai = new RpsAi();
+        int winner;
 
-        System.out.println("Rock, Paper, Scissors against AI");
+        System.out.println("Rock-Paper-Scissors against AI");
         System.out.println("");
 
-        while (quit == false) {
+        /**
+         * Create the game loop
+         */
+        while (!quit) {
 
-            System.out.println("What would you like to do?");
-            System.out.println("1. Play");
-            System.out.println("2. Exit");
-            System.out.print("Enter numeric value: ");
-
-            int input = scanner.nextInt();
-
-            if (input == 1) {
-                play();
+            String playerMove = player.getMove();
+            if (playerMove.equals("QUIT")) {
+                quit = true;
                 break;
             }
-            if (input == 2) {
-                System.out.println("Thank you for playing");
-                quit = true;
+            String aiMove = ai.getMove();
+            
+            System.out.println("Your move: " + playerMove + " | Computer's move: " + aiMove);
+            winner = roundWinner(playerMove, aiMove);
+
+            if (winner == 1) {
+                System.out.println("The computer wins.");
+                ai.raiseScore();
+            } else if (winner == -1) {
+                System.out.println("The player wins.");
+                player.raiseScore();
             } else {
-                System.out.println("");
-                System.out.println("Invalid input.");
-                System.out.println("");
+                System.out.println("It's a tie.");
             }
+
+            System.out.println("Player: " + player.getScore() + " | Computer: "
+                    + ai.getScore());
+            System.out.println("");
         }
+        System.out.println("");
+        System.out.println("Game has ended, final scores:");
+        System.out.println("Player: " + player.getScore());
+        System.out.println("Computer: " + ai.getScore());
+    }
+
+    static void dealWithWinner(int winner) {
 
     }
-    /**
-     * Create the gameloop
-     */
-    public static void play() {
-        boolean play = true;
-        
+
+    static int roundWinner(String playerMove, String aiMove) {
+        int winner;
+
+        if (aiMove.equals(playerMove)) {
+            winner = 0;
+        } else if (aiMove.equals("ROCK")
+                && playerMove.equals("SCISSORS")) {
+            winner = 1;
+        } else if (aiMove.equals("PAPER")
+                && playerMove.equals("ROCK")) {
+            winner = 1;
+        } else if (aiMove.equals("SCISSORS")
+                && playerMove.equals("PAPER")) {
+            winner = 1;
+        } else {
+            winner = -1;
+        }
+        return winner;
     }
 
 }
