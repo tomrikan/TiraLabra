@@ -22,7 +22,7 @@ public class RpsAi {
     }
 
     /*
-     * Create AI
+     * Create AI and get it's move.
      */
     public String getMove() {
         // Quick random solution to get the game functioning

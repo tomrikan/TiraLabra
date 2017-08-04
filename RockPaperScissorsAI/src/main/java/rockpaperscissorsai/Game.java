@@ -8,6 +8,7 @@ package rockpaperscissorsai;
 import java.util.Scanner;
 
 /**
+ * Class contains basic game functioning.
  *
  * @author tomi
  */
@@ -23,20 +24,20 @@ public class Game {
         System.out.println("");
 
         /**
-         * Create the game loop
+         * Create the game loop. Take input from player and ai. Repeat until user chooses to quit.
          */
         while (!quit) {
 
             String playerMove = player.getMove();
-            if (playerMove.equals("QUIT")) {
+            if (playerMove.equals("QUIT")) { //quick exit function
                 quit = true;
                 break;
             }
             String aiMove = ai.getMove();
-            
-            System.out.println("Your move: " + playerMove + " | Computer's move: " + aiMove);
-            winner = roundWinner(playerMove, aiMove);
 
+            System.out.println("Your move: " + playerMove + " | Computer's move: " + aiMove);
+
+            winner = roundWinner(playerMove, aiMove);
             if (winner == 1) {
                 System.out.println("The computer wins.");
                 ai.raiseScore();
@@ -61,6 +62,9 @@ public class Game {
 
     }
 
+    /*
+     * Determine who wins the round.
+     */
     static int roundWinner(String playerMove, String aiMove) {
         int winner;
 
@@ -80,5 +84,4 @@ public class Game {
         }
         return winner;
     }
-
 }
