@@ -47,6 +47,7 @@ public class Game {
             } else {
                 System.out.println("It's a tie.");
             }
+            ai.updateData(playerMove);
 
             System.out.println("Player: " + player.getScore() + " | Computer: "
                     + ai.getScore());
@@ -56,10 +57,6 @@ public class Game {
         System.out.println("Game has ended, final scores:");
         System.out.println("Player: " + player.getScore());
         System.out.println("Computer: " + ai.getScore());
-    }
-
-    static void dealWithWinner(int winner) {
-
     }
 
     /*
