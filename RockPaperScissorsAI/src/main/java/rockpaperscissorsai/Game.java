@@ -14,6 +14,10 @@ import java.util.Scanner;
  */
 public class Game {
 
+    /**
+     * Create the game loop and basic functions. Take input from player and ai. Repeat until user
+     * chooses to quit. AI takes in player's move.
+     */
     public static void main(String[] args) {
         boolean quit = false;
         Player player = new Player();
@@ -23,9 +27,6 @@ public class Game {
         System.out.println("Rock-Paper-Scissors against AI");
         System.out.println("");
 
-        /**
-         * Create the game loop. Take input from player and ai. Repeat until user chooses to quit.
-         */
         while (!quit) {
 
             String playerMove = player.getMove();
@@ -59,8 +60,11 @@ public class Game {
         System.out.println("Computer: " + ai.getScore());
     }
 
-    /*
+    /**
      * Determine who wins the round.
+     * @param playerMove player's move.
+     * @param aiMove AI's move.
+     * @return winner.
      */
     static int roundWinner(String playerMove, String aiMove) {
         int winner;

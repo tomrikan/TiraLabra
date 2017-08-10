@@ -16,7 +16,10 @@ public class Player {
 
     private Scanner scanner;
     private int score;
-
+    
+    /**
+     * Constructor.
+     */
     public Player() {
         this.scanner = new Scanner(System.in);
         this.score = 0;
@@ -40,11 +43,18 @@ public class Player {
         }
         return move;
     }
-
+    
+    /**
+     * Get player's score.
+     * @return score.
+     */
     public int getScore() {
         return this.score;
     }
-
+    
+    /**
+     * Raise player's score.
+     */
     public void raiseScore() {
         this.score++;
     }

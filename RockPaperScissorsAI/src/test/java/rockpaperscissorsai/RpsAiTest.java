@@ -5,7 +5,7 @@ package rockpaperscissorsai;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
+import java.util.ArrayList;
 import static org.hamcrest.CoreMatchers.anyOf;
 import static org.hamcrest.CoreMatchers.is;
 import org.junit.After;
@@ -22,6 +22,8 @@ import rockpaperscissorsai.RpsAi;
  */
 public class RpsAiTest {
 
+    RpsAi ai;
+
     public RpsAiTest() {
     }
 
@@ -35,6 +37,7 @@ public class RpsAiTest {
 
     @Before
     public void setUp() {
+        ai = new RpsAi();
     }
 
     @After
@@ -43,29 +46,42 @@ public class RpsAiTest {
 
     @Test
     public void scoreAtBeginningZero() {
-        RpsAi ai = new RpsAi();
-
         int score = ai.getScore();
-
         assertEquals(0, score);
     }
 
     @Test
     public void rightScoreAfterIncreasingScore() {
-        RpsAi ai = new RpsAi();
-
         ai.raiseScore();
         int score = ai.getScore();
         assertEquals(1, score);
     }
 
     @Test
-    public void correctMove() {
-        RpsAi ai = new RpsAi();
-
-        for (int i = 0; i < 100; i++) {
+    public void aiPlaysCorrectMoves() {
+        for (int i = 0; i < 10000; i++) {
             String move = ai.getMove();
             assertThat(move, anyOf(is("ROCK"), is("PAPER"), is("SCISSORS")));
         }
     }
+
+    @Test
+    public void updateDataUpdatesMovesList() {
+        ai.updateData("ROCK");
+        ai.updateData("PAPER");
+        ai.updateData("SCISSORS");
+        ArrayList<Integer> test = new ArrayList<>();
+        test.add(0);
+        test.add(1);
+        test.add(2);
+        
+        assertEquals(test, ai.getMoves());
+    }
+    
+    @Test
+    public void updatesMarkovCorrectly() {
+        ai.updateData("PAPER");
+        //TODO
+    }
+
 }
