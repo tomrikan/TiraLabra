@@ -19,6 +19,8 @@ import rockpaperscissorsai.Player;
  * @author tomi
  */
 public class PlayerTest {
+    
+    Player player;
 
     public PlayerTest() {
     }
@@ -33,6 +35,7 @@ public class PlayerTest {
 
     @Before
     public void setUp() {
+        this.player = new Player();
     }
 
     @After
@@ -41,20 +44,18 @@ public class PlayerTest {
 
     @Test
     public void scoreAtBeginningZero() {
-        Player player = new Player();
         int score = player.getScore();
         assertEquals(0, score);
     }
 
     @Test
     public void rightScoreAfterRaising() {
-        Player player = new Player();
         player.raiseScore();
         int score = player.getScore();
         assertEquals(1, score);
     }
     @Test
     public void entersCorrectMove() {
-        
+        //TODO
     }
 }
