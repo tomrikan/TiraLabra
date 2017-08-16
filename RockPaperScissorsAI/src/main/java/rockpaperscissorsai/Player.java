@@ -34,20 +34,16 @@ public class Player {
     public String getMove() {
         String move = "";
 
-        while (!move.equals("ROCK")
-                && !move.equals("PAPER")
-                && !move.equals("SCISSORS")
+        while (!move.equals("R")
+                && !move.equals("P")
+                && !move.equals("S")
                 && !move.equals("QUIT")) {
-            System.out.print("Enter your move (rock, paper, scissors,(quit for quitting)): ");
+            System.out.print("Enter your move (r, p, s,(quit for quitting)): ");
             move = scanner.nextLine().toUpperCase();
         }
         return move;
     }
     
-    /**
-     * Get player's score.
-     * @return score.
-     */
     public int getScore() {
         return this.score;
     }

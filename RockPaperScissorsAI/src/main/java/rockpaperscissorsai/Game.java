@@ -71,14 +71,14 @@ public class Game {
 
         if (aiMove.equals(playerMove)) {
             winner = 0;
-        } else if (aiMove.equals("ROCK")
-                && playerMove.equals("SCISSORS")) {
+        } else if (aiMove.equals("R")
+                && playerMove.equals("S")) {
             winner = 1;
-        } else if (aiMove.equals("PAPER")
-                && playerMove.equals("ROCK")) {
+        } else if (aiMove.equals("P")
+                && playerMove.equals("R")) {
             winner = 1;
-        } else if (aiMove.equals("SCISSORS")
-                && playerMove.equals("PAPER")) {
+        } else if (aiMove.equals("S")
+                && playerMove.equals("P")) {
             winner = 1;
         } else {
             winner = -1;

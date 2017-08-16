@@ -46,11 +46,11 @@ public class RpsAi {
 
         //return opposite of what is predicted
         if (rndFloat <= this.markov[this.lastOppMove][1]) {
-            return "SCISSORS";
+            return "S";
         } else if (rndFloat <= this.markov[this.lastOppMove][2] + markov[this.lastOppMove][1]) { //check probability space
-            return "ROCK";
+            return "R";
         } else {
-            return "PAPER";
+            return "P";
         }
     }
 
@@ -62,10 +62,10 @@ public class RpsAi {
 
         this.oppMoveBeforeLast = this.lastOppMove;
         //determine opp's last move and add it to the list.
-        if (move.equals("ROCK")) {
+        if (move.equals("R")) {
             this.lastOppMove = 0;
             moves.add(0);
-        } else if (move.equals("PAPER")) {
+        } else if (move.equals("P")) {
             this.lastOppMove = 1;
             moves.add(1);
         } else {
@@ -83,10 +83,6 @@ public class RpsAi {
         }
     }
 
-    /**
-     * Get AI's score.
-     * @return score.
-     */
     public int getScore() {
         return this.score;
     }
