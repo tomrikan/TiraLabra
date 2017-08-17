@@ -18,7 +18,7 @@ public class RpsAi {
     private int score;
     private int[] timesOppPlayedMove;
     private float[][] markov;
-    private ArrayList<Integer> moves;
+    private ArrayList<Integer> oppMoves;
     private int lastOppMove;
     private int oppMoveBeforeLast;
 
@@ -29,7 +29,7 @@ public class RpsAi {
         this.score = 0;
         this.timesOppPlayedMove = new int[]{0, 0, 0}; //rock, paper, scissors
         this.markov = new float[][]{{0.33f, 0.33f, 0.33f}, {0.33f, 0.33f, 0.33f}, {0.33f, 0.33f, 0.33f}};
-        this.moves = new ArrayList<>();
+        this.oppMoves = new ArrayList<>();
     }
 
     /**
@@ -53,6 +53,49 @@ public class RpsAi {
             return "P";
         }
     }
+    
+    /**
+     * Check move history and return the move that opponent would most likely play
+     * based on the history.
+     * @param n
+     * @return move as integer.
+     */
+    public int historySeek(int n) {
+        //TODO: check both opp and own move sequences parallel.
+        int[] sequence = new int[n];
+        int[] timesPlayed = {0, 0, 0};
+        
+        for (int i = 0; i < n - 1; i++) {
+            sequence[i] = oppMoves.get(oppMoves.size() - n + i);
+        }
+        
+        for (int i = 0; i < oppMoves.size() - 1; i++) {
+            if (oppMoves.get(i) == sequence[0]) {
+                for (int j = 0; j < sequence.length - 1; j++) {
+                    if (sequence[j] != oppMoves.get(i + j)) {
+                        break;
+                    }
+                    if (j == sequence.length - 1) {
+                        timesPlayed[oppMoves.get(i + j + 1)] ++;
+                    }
+                }
+                
+            }
+        }
+        int biggest = timesPlayed[0];
+        int move = 0;
+        
+        if (timesPlayed[1] > biggest) {
+            biggest = timesPlayed[1];
+            move = 1;
+        }
+        if (timesPlayed[2] > biggest) {
+            biggest = timesPlayed[2];
+            move = 2;
+        }
+        
+        return move;
+    }
 
     /**
      * Take opponent's previous move and update markov chain and move list.
@@ -64,13 +107,13 @@ public class RpsAi {
         //determine opp's last move and add it to the list.
         if (move.equals("R")) {
             this.lastOppMove = 0;
-            moves.add(0);
+            oppMoves.add(0);
         } else if (move.equals("P")) {
             this.lastOppMove = 1;
-            moves.add(1);
+            oppMoves.add(1);
         } else {
             this.lastOppMove = 2;
-            moves.add(2);
+            oppMoves.add(2);
         }
         //update markov chain
         for (int i = 0; i < 3; i++) {
@@ -99,7 +142,7 @@ public class RpsAi {
      * @return moves.
      */
     public ArrayList getMoves() {
-        return this.moves;
+        return this.oppMoves;
     }
     
     public float[][] getMarkov() {
