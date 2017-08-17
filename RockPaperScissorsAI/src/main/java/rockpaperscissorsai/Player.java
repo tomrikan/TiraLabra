@@ -16,7 +16,7 @@ public class Player {
 
     private Scanner scanner;
     private int score;
-    
+
     /**
      * Constructor.
      */
@@ -31,23 +31,19 @@ public class Player {
      *
      * @return user's move as rock, paper or scissors.
      */
-    public String getMove() {
-        String move = "";
+    public Boolean checkMove(String move) {
 
-        while (!move.equals("R")
-                && !move.equals("P")
-                && !move.equals("S")
-                && !move.equals("QUIT")) {
-            System.out.print("Enter your move (r, p, s,(quit for quitting)): ");
-            move = scanner.nextLine().toUpperCase();
+        if (move.equals("R") || move.equals("P") || move.equals("S")
+                || move.equals("QUIT")) {
+            return true;
         }
-        return move;
+        return false;
     }
-    
+
     public int getScore() {
         return this.score;
     }
-    
+
     /**
      * Raise player's score.
      */

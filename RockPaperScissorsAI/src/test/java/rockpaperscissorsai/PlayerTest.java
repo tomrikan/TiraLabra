@@ -5,7 +5,6 @@ package rockpaperscissorsai;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -19,7 +18,7 @@ import rockpaperscissorsai.Player;
  * @author tomi
  */
 public class PlayerTest {
-    
+
     Player player;
 
     public PlayerTest() {
@@ -54,8 +53,34 @@ public class PlayerTest {
         int score = player.getScore();
         assertEquals(1, score);
     }
+
     @Test
-    public void entersCorrectMove() {
-        //TODO
+    public void checkMoveReturnsTrueWhenCorrect() {
+        Boolean correct;
+        correct = player.checkMove("S");
+        assertEquals(true, correct);
+
+        correct = player.checkMove("P");
+        assertEquals(true, correct);
+
+        correct = player.checkMove("R");
+        assertEquals(true, correct);
+
+        correct = player.checkMove("QUIT");
+        assertEquals(true, correct);
+    }
+    
+    @Test
+    public void checkMoveReturnFalseCorrectly() {
+        boolean correct;
+        
+        correct = player.checkMove("3");
+        assertEquals(false, correct);
+        
+        correct = player.checkMove("SPR");
+        assertEquals(false, correct);
+        
+        correct = player.checkMove("QUITZ");
+        assertEquals(false, correct);
     }
 }

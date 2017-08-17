@@ -35,15 +35,20 @@ public class RpsAi {
     }
 
     /**
-     * Get AI's move.
+     * Get AI's move. Uses three private sub methods.
      *
      * @return AI's move.
      */
     public String getMove() {
         //TODO: Get move based on which works better, markov or move history.
         
-        //quick solution, every second move based on history after 20 rounds, otherwise on markov.
-        if (this.roundsPlayed > 10 && this.roundsPlayed % 2 == 0) {
+        //if getting lot of loses throw in random.
+        if (roundsPlayed - score > roundsPlayed/2) {
+            return getRandomMove();
+        }
+        
+        //quick solution, every second move based on history after 40 rounds, otherwise on markov.
+        if (this.roundsPlayed > 40 && this.roundsPlayed % 2 == 0) {
             int move = historySeek(2);
             return getHistoryBasedMove(move);
         } else {
@@ -74,6 +79,20 @@ public class RpsAi {
             return "R";
         } else {
             return "P";
+        }
+    }
+    
+    private String getRandomMove() {
+        int rndInt;
+        Random rnd = new Random();
+        rndInt = rnd.nextInt(3);
+        
+        if (rndInt == 0) {
+            return "R";
+        } else if (rndInt == 1) {
+            return "P";
+        } else { 
+            return "S";
         }
     }
 
@@ -178,4 +197,10 @@ public class RpsAi {
     public float[][] getMarkov() {
         return this.markov;
     }
+    
+    public int getRoundsPlayed() {
+        return this.roundsPlayed;
+    }
+    
+    
 }

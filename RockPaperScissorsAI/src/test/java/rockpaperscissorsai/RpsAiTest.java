@@ -61,15 +61,15 @@ public class RpsAiTest {
     public void aiPlaysCorrectMoves() {
         for (int i = 0; i < 10000; i++) {
             String move = ai.getMove();
-            assertThat(move, anyOf(is("ROCK"), is("PAPER"), is("SCISSORS")));
+            assertThat(move, anyOf(is("R"), is("P"), is("S")));
         }
     }
 
     @Test
     public void updateDataUpdatesMovesList() {
-        ai.updateData("ROCK");
-        ai.updateData("PAPER");
-        ai.updateData("SCISSORS");
+        ai.updateData("R");
+        ai.updateData("P");
+        ai.updateData("S");
         ArrayList<Integer> test = new ArrayList<>();
         test.add(0);
         test.add(1);
@@ -79,8 +79,15 @@ public class RpsAiTest {
     }
     
     @Test
+    public void updateDataIncreasesRoundsPlayed() {
+        ai.updateData("R");
+        int times = ai.getRoundsPlayed();
+        assertEquals(1, times);
+    }
+    
+    @Test
     public void updatesMarkovCorrectly() {
-        ai.updateData("PAPER");
+        ai.updateData("P");
         //TODO
     }
 
