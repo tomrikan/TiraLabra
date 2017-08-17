@@ -41,15 +41,15 @@ public class RpsAi {
      */
     public String getMove() {
         //TODO: Get move based on which works better, markov or move history.
-        
+
         //if getting lot of loses throw in random.
-        if (roundsPlayed - score > roundsPlayed/2) {
+        if (roundsPlayed - score > roundsPlayed / 2) {
             return getRandomMove();
         }
-        
+
         //quick solution, every second move based on history after 40 rounds, otherwise on markov.
         if (this.roundsPlayed > 40 && this.roundsPlayed % 2 == 0) {
-            int move = historySeek(2);
+            int move = historySeek(3);
             return getHistoryBasedMove(move);
         } else {
             return getMarkovBasedMove();
@@ -67,7 +67,7 @@ public class RpsAi {
         }
     }
 
-    private String getMarkovBasedMove() {
+    public String getMarkovBasedMove() {
         float rndFloat;
         Random rnd = new Random();
         rndFloat = rnd.nextFloat();
@@ -81,17 +81,17 @@ public class RpsAi {
             return "P";
         }
     }
-    
-    private String getRandomMove() {
+
+    public String getRandomMove() {
         int rndInt;
         Random rnd = new Random();
         rndInt = rnd.nextInt(3);
-        
+
         if (rndInt == 0) {
             return "R";
         } else if (rndInt == 1) {
             return "P";
-        } else { 
+        } else {
             return "S";
         }
     }
@@ -103,7 +103,7 @@ public class RpsAi {
      * @param n
      * @return move as integer.
      */
-    private int historySeek(int n) {
+    public int historySeek(int n) {
         //TODO: check both opp and own move sequences parallel.
         int[] sequence = new int[n];
         int[] timesPlayed = {0, 0, 0};
@@ -111,7 +111,7 @@ public class RpsAi {
         for (int i = 0; i < n - 1; i++) {
             sequence[i] = oppMoves.get(oppMoves.size() - n + i);
         }
-
+        //Not working properly, check it out..
         for (int i = 0; i < oppMoves.size() - 1; i++) {
             if (oppMoves.get(i) == sequence[0]) {
                 for (int j = 0; j < sequence.length - 1; j++) {
@@ -122,7 +122,6 @@ public class RpsAi {
                         timesPlayed[oppMoves.get(i + j + 1)]++;
                     }
                 }
-
             }
         }
         return biggest(timesPlayed);
@@ -197,10 +196,9 @@ public class RpsAi {
     public float[][] getMarkov() {
         return this.markov;
     }
-    
+
     public int getRoundsPlayed() {
         return this.roundsPlayed;
     }
-    
-    
+
 }

@@ -74,21 +74,52 @@ public class RpsAiTest {
         test.add(0);
         test.add(1);
         test.add(2);
-        
+
         assertEquals(test, ai.getMoves());
     }
-    
+
     @Test
     public void updateDataIncreasesRoundsPlayed() {
         ai.updateData("R");
         int times = ai.getRoundsPlayed();
         assertEquals(1, times);
     }
-    
+
     @Test
     public void updatesMarkovCorrectly() {
         ai.updateData("P");
         //TODO
     }
+
+    @Test
+    public void markovBasedMoveReturnsRightMoves() {
+        for (int i = 0; i < 1000; i++) {
+            String move = ai.getMarkovBasedMove();
+            assertThat(move, anyOf(is("R"), is("P"), is("S")));
+        }
+    }
+
+    @Test
+    public void getRandomReturnsRightMoves() {
+        for (int i = 0; i < 1000; i++) {
+            String move = ai.getMarkovBasedMove();
+            assertThat(move, anyOf(is("R"), is("P"), is("S")));
+        }
+    }
+    /*
+    @Test
+    public void historySeekReturnsCorrect() {
+        ai.updateData("S");
+        ai.updateData("P");
+        ai.updateData("P");
+        ai.updateData("S");
+        ai.updateData("P");
+        ai.updateData("P");
+        ai.updateData("S");
+        ai.updateData("P");
+        ai.updateData("P");
+        
+        assertEquals(2, ai.historySeek(3));
+    }*/
 
 }

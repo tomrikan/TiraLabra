@@ -42,7 +42,6 @@ public class Game {
             }
 
             String aiMove = ai.getMove();
-
             System.out.println("Your move: " + playerMove + " | Computer's move: " + aiMove);
 
             winner = roundWinner(playerMove, aiMove);
