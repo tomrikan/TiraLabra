@@ -108,19 +108,20 @@ public class RpsAi {
         int[] sequence = new int[n];
         int[] timesPlayed = new int[]{0, 0, 0};
 
-        for (int i = 0; i < n - 1; i++) {
+        for (int i = 0; i < n; i++) {
             sequence[i] = oppMoves.get(oppMoves.size() - n + i);
         }
-        //Not working properly, FIXFIXFIX..
-        for (int i = 0; i < oppMoves.size() - n - 1; i++) {
+
+        //Might be working correctly, more testing perhaps...
+        for (int i = 0; i < oppMoves.size() - n; i++) {
             if (oppMoves.get(i) == sequence[0]) {
-                for (int j = 0; j < sequence.length - 1; j++) {
+                for (int j = 0; j < n; j++) {
                     if (sequence[j] != oppMoves.get(i + j)) {
                         break;
                     }
                     if (j == sequence.length - 1) {
                         timesPlayed[oppMoves.get(i + j + 1)]++;
-                    }   
+                    }
                 }
             }
         }
