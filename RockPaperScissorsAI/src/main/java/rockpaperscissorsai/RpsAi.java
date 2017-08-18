@@ -100,19 +100,19 @@ public class RpsAi {
      * Check move history and return the move that opponent would most likely
      * play based on the history.
      *
-     * @param n
+     * @param n as length of sequence to be checked.
      * @return move as integer.
      */
     public int historySeek(int n) {
         //TODO: check both opp and own move sequences parallel.
         int[] sequence = new int[n];
-        int[] timesPlayed = {0, 0, 0};
+        int[] timesPlayed = new int[]{0, 0, 0};
 
         for (int i = 0; i < n - 1; i++) {
             sequence[i] = oppMoves.get(oppMoves.size() - n + i);
         }
-        //Not working properly, check it out..
-        for (int i = 0; i < oppMoves.size() - 1; i++) {
+        //Not working properly, FIXFIXFIX..
+        for (int i = 0; i < oppMoves.size() - n - 1; i++) {
             if (oppMoves.get(i) == sequence[0]) {
                 for (int j = 0; j < sequence.length - 1; j++) {
                     if (sequence[j] != oppMoves.get(i + j)) {
@@ -120,11 +120,12 @@ public class RpsAi {
                     }
                     if (j == sequence.length - 1) {
                         timesPlayed[oppMoves.get(i + j + 1)]++;
-                    }
+                    }   
                 }
             }
         }
-        return biggest(timesPlayed);
+        int move = biggest(timesPlayed);
+        return move;
     }
 
     private int biggest(int[] timesPlayed) {
@@ -136,7 +137,6 @@ public class RpsAi {
             move = 1;
         }
         if (timesPlayed[2] > biggest) {
-            biggest = timesPlayed[2];
             move = 2;
         }
         return move;

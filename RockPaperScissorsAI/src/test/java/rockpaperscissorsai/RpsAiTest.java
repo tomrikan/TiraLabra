@@ -106,7 +106,7 @@ public class RpsAiTest {
             assertThat(move, anyOf(is("R"), is("P"), is("S")));
         }
     }
-    /*
+    
     @Test
     public void historySeekReturnsCorrect() {
         ai.updateData("S");
@@ -120,6 +120,6 @@ public class RpsAiTest {
         ai.updateData("P");
         
         assertEquals(2, ai.historySeek(3));
-    }*/
+    }
 
 }
