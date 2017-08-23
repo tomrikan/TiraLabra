@@ -68,7 +68,11 @@ public class RpsAi {
             return "R";
         }
     }
-
+    
+    /**
+     * Returns move based on markov chain.
+     * @return move as string.
+     */
     public String getMarkovBasedMove() {
         float rndFloat;
         Random rnd = new Random();
@@ -83,7 +87,11 @@ public class RpsAi {
             return "P";
         }
     }
-
+    
+    /**
+     * Gets random based move.
+     * @return move as string.
+     */
     public String getRandomMove() {
         int rndInt;
         Random rnd = new Random();
@@ -130,7 +138,12 @@ public class RpsAi {
         int move = biggest(timesPlayed);
         return move;
     }
-
+    
+    /**
+     * return biggest number out of array.
+     * @param timesPlayed
+     * @return biggest move as integer.
+     */
     private int biggest(int[] timesPlayed) {
         int biggest = timesPlayed[0];
         int move = 0;
