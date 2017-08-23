@@ -98,6 +98,7 @@ public class Game {
             } else if (winner == -1) {
                 System.out.println("The player wins.");
                 player.raiseScore();
+                ai.raiseLooses();
             } else {
                 System.out.println("It's a tie.");
             }
@@ -132,9 +133,11 @@ public class Game {
             if (winner == 1) {
                 System.out.println("AI_2 wins.");
                 aiSecond.raiseScore();
+                aiFirst.raiseLooses();
             } else if (winner == -1) {
                 System.out.println("AI_1 wins.");
                 aiFirst.raiseScore();
+                aiSecond.raiseLooses();
             } else {
                 System.out.println("It's a tie.");
             }

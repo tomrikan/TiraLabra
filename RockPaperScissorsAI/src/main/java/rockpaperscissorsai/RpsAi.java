@@ -22,6 +22,7 @@ public class RpsAi {
     private int lastOppMove;
     private int oppMoveBeforeLast;
     private int roundsPlayed;
+    private int loosesInRow;
 
     /**
      * Constructor.
@@ -32,6 +33,7 @@ public class RpsAi {
         this.markov = new float[][]{{0.33f, 0.33f, 0.33f}, {0.33f, 0.33f, 0.33f}, {0.33f, 0.33f, 0.33f}};
         this.oppMoves = new ArrayList<>();
         this.roundsPlayed = 0;
+        this.loosesInRow = 0;
     }
 
     /**
@@ -43,7 +45,7 @@ public class RpsAi {
         //TODO: Get move based on which works better, markov or move history.
 
         //if getting lot of loses throw in random.
-        if (roundsPlayed - score > roundsPlayed / 2) {
+        if (this.loosesInRow > 3) {
             return getRandomMove();
         }
 
@@ -183,6 +185,11 @@ public class RpsAi {
      */
     public void raiseScore() {
         this.score++;
+        this.loosesInRow = 0;
+    }
+    
+    public void raiseLooses() {
+        this.loosesInRow ++;
     }
 
     /**
