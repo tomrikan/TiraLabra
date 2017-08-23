@@ -19,14 +19,61 @@ public class Game {
      * Repeat until user chooses to quit. AI takes in player's move.
      */
     public static void main(String[] args) {
-        boolean quit = false;
-        Player player = new Player();
-        RpsAi ai = new RpsAi();
-        int winner;
+
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("Rock-Paper-Scissors against AI");
-        System.out.println("");
+        System.out.println("1. Player VS AI");
+        System.out.println("2. AI VS AI");
+        int option = scanner.nextInt();
+
+        if (option == 1) {
+            gameLoop(scanner);
+        } else if (option == 2) {
+            gameLoopAi();
+        } else {
+            System.out.println("Give legit input.");
+        }
+
+    }
+
+    /**
+     * Determine who wins the round.
+     *
+     * @param playerMove player's move.
+     * @param aiMove AI's move.
+     * @return winner.
+     */
+    static int roundWinner(String playerMove, String aiMove) {
+        int winner;
+
+        if (aiMove.equals(playerMove)) {
+            winner = 0;
+        } else if (aiMove.equals("R")
+                && playerMove.equals("S")) {
+            winner = 1;
+        } else if (aiMove.equals("P")
+                && playerMove.equals("R")) {
+            winner = 1;
+        } else if (aiMove.equals("S")
+                && playerMove.equals("P")) {
+            winner = 1;
+        } else {
+            winner = -1;
+        }
+        return winner;
+    }
+    
+    /**
+     * Basic gameloop for human vs AI.
+     * @param scanner as Scanner.
+     */
+    public static void gameLoop(Scanner scanner) {
+        Player player = new Player();
+        RpsAi ai = new RpsAi();
+
+        boolean quit = false;
+        int winner;
 
         while (!quit) {
 
@@ -65,31 +112,42 @@ public class Game {
         System.out.println("Player: " + player.getScore());
         System.out.println("Computer: " + ai.getScore());
     }
-
+    
     /**
-     * Determine who wins the round.
-     *
-     * @param playerMove player's move.
-     * @param aiMove AI's move.
-     * @return winner.
+     * Gameloop for AI vs AI, namely itself.
      */
-    static int roundWinner(String playerMove, String aiMove) {
+    public static void gameLoopAi() {
+        RpsAi aiFirst = new RpsAi();
+        RpsAi aiSecond = new RpsAi();
+
         int winner;
 
-        if (aiMove.equals(playerMove)) {
-            winner = 0;
-        } else if (aiMove.equals("R")
-                && playerMove.equals("S")) {
-            winner = 1;
-        } else if (aiMove.equals("P")
-                && playerMove.equals("R")) {
-            winner = 1;
-        } else if (aiMove.equals("S")
-                && playerMove.equals("P")) {
-            winner = 1;
-        } else {
-            winner = -1;
+        for (int i = 0; i < 100; i++) {
+            String aiFirstMove = aiFirst.getMove();
+            String aiSecondMove = aiSecond.getMove();
+
+            System.out.println("AI_1: " + aiFirstMove + " | AI_2: " + aiSecondMove);
+
+            winner = roundWinner(aiFirstMove, aiSecondMove);
+            if (winner == 1) {
+                System.out.println("AI_2 wins.");
+                aiSecond.raiseScore();
+            } else if (winner == -1) {
+                System.out.println("AI_1 wins.");
+                aiFirst.raiseScore();
+            } else {
+                System.out.println("It's a tie.");
+            }
+            aiFirst.updateData(aiSecondMove);
+            aiSecond.updateData(aiFirstMove);
+
+            System.out.println("AI_1: " + aiFirst.getScore() + " | AI_2: "
+                    + aiSecond.getScore());
+            System.out.println("");
         }
-        return winner;
+        System.out.println("");
+        System.out.println("Game has ended, final scores:");
+        System.out.println("AI_1: " + aiFirst.getScore());
+        System.out.println("AI_2: " + aiSecond.getScore());
     }
 }
