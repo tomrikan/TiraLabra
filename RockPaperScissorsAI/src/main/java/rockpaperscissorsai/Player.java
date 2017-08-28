@@ -14,22 +14,20 @@ import java.util.Scanner;
  */
 public class Player {
 
-    private Scanner scanner;
     private int score;
 
     /**
      * Constructor.
      */
     public Player() {
-        this.scanner = new Scanner(System.in);
         this.score = 0;
     }
 
     /**
-     * Read in user move. Prompt until valid move is entered. Valid moves are
+     * Check user move. Valid moves are
      * rock, paper and scissors.
      *
-     * @return user's move as rock, paper or scissors.
+     * @return true if valid, false if not.
      */
     public Boolean checkMove(String move) {
 

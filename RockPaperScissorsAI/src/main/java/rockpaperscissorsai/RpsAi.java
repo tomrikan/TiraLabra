@@ -18,7 +18,7 @@ public class RpsAi {
     private int score;
     private int[] timesOppPlayedMove;
     private float[][] markov;
-    private ArrayList<Integer> oppMoves;
+    private DynamicArray oppMoves;
     private int lastOppMove;
     private int oppMoveBeforeLast;
     private int roundsPlayed;
@@ -31,9 +31,9 @@ public class RpsAi {
         this.score = 0;
         this.timesOppPlayedMove = new int[]{0, 0, 0}; //rock, paper, scissors
         this.markov = new float[][]{{0.33f, 0.33f, 0.33f}, {0.33f, 0.33f, 0.33f}, {0.33f, 0.33f, 0.33f}};
-        this.oppMoves = new ArrayList<>();
         this.roundsPlayed = 0;
         this.loosesInRow = 0;
+        this.oppMoves = new DynamicArray();
     }
 
     /**
@@ -42,7 +42,6 @@ public class RpsAi {
      * @return AI's move.
      */
     public String getMove() {
-        //TODO: Get move based on which works better, markov or move history.
 
         //if getting lot of loses throw in random.
         if (this.loosesInRow > 3) {
@@ -68,9 +67,10 @@ public class RpsAi {
             return "R";
         }
     }
-    
+
     /**
      * Returns move based on markov chain.
+     *
      * @return move as string.
      */
     public String getMarkovBasedMove() {
@@ -87,9 +87,10 @@ public class RpsAi {
             return "P";
         }
     }
-    
+
     /**
      * Gets random based move.
+     *
      * @return move as string.
      */
     public String getRandomMove() {
@@ -138,9 +139,10 @@ public class RpsAi {
         int move = biggest(timesPlayed);
         return move;
     }
-    
+
     /**
      * return biggest number out of array.
+     *
      * @param timesPlayed
      * @return biggest move as integer.
      */
@@ -200,9 +202,9 @@ public class RpsAi {
         this.score++;
         this.loosesInRow = 0;
     }
-    
+
     public void raiseLooses() {
-        this.loosesInRow ++;
+        this.loosesInRow++;
     }
 
     /**
@@ -210,7 +212,7 @@ public class RpsAi {
      *
      * @return moves.
      */
-    public ArrayList getMoves() {
+    public DynamicArray getMoves() {
         return this.oppMoves;
     }
 
@@ -221,5 +223,4 @@ public class RpsAi {
     public int getRoundsPlayed() {
         return this.roundsPlayed;
     }
-
 }

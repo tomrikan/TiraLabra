@@ -7,6 +7,7 @@ package rockpaperscissorsai;
  */
 import java.util.ArrayList;
 import static org.hamcrest.CoreMatchers.anyOf;
+import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -70,12 +71,12 @@ public class RpsAiTest {
         ai.updateData("R");
         ai.updateData("P");
         ai.updateData("S");
-        ArrayList<Integer> test = new ArrayList<>();
+        DynamicArray test = new DynamicArray();
         test.add(0);
         test.add(1);
         test.add(2);
 
-        assertEquals(test, ai.getMoves());
+        assertThat(test, equalTo(ai.getMoves()));
     }
 
     @Test
