@@ -103,7 +103,7 @@ public class RpsAiTest {
     @Test
     public void getRandomReturnsRightMoves() {
         for (int i = 0; i < 1000; i++) {
-            String move = ai.getMarkovBasedMove();
+            String move = ai.getRandomMove();
             assertThat(move, anyOf(is("R"), is("P"), is("S")));
         }
     }

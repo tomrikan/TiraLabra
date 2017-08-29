@@ -115,7 +115,7 @@ public class RpsAi {
      * @return move as integer.
      */
     public int historySeek(int n) {
-        //TODO: check both opp and own move sequences parallel.
+
         int[] sequence = new int[n];
         int[] timesPlayed = new int[]{0, 0, 0};
 
@@ -123,7 +123,6 @@ public class RpsAi {
             sequence[i] = oppMoves.get(oppMoves.size() - n + i);
         }
 
-        //Might be working correctly, more testing perhaps...
         for (int i = 0; i < oppMoves.size() - n; i++) {
             if (oppMoves.get(i) == sequence[0]) {
                 for (int j = 0; j < n; j++) {

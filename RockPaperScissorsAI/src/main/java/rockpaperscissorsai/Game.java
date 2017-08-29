@@ -24,17 +24,22 @@ public class Game {
 
         System.out.println("Rock-Paper-Scissors against AI");
         System.out.println("1. Player VS AI");
-        System.out.println("2. AI VS AI");
-        int option = scanner.nextInt();
+        System.out.println("2. AI VS AI for 1000 rounds");
+        String option = "";
 
-        if (option == 1) {
-            gameLoop(scanner);
-        } else if (option == 2) {
-            gameLoopAi();
-        } else {
-            System.out.println("Give legit input.");
+        while (!option.equals("1") || !option.equals("2")) {
+            option = scanner.nextLine();
+
+            if (option.equals("1")) {
+                gameLoop(scanner);
+                break;
+            } else if (option.equals("2")) {
+                gameLoopAi();
+                break;
+            } else {
+                System.out.println("Give legit input.");
+            }
         }
-
     }
 
     /**
@@ -63,9 +68,10 @@ public class Game {
         }
         return winner;
     }
-    
+
     /**
      * Basic gameloop for human vs AI.
+     *
      * @param scanner as Scanner.
      */
     public static void gameLoop(Scanner scanner) {
@@ -113,7 +119,7 @@ public class Game {
         System.out.println("Player: " + player.getScore());
         System.out.println("Computer: " + ai.getScore());
     }
-    
+
     /**
      * Gameloop for AI vs AI, namely itself.
      */
@@ -123,7 +129,7 @@ public class Game {
 
         int winner;
 
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 1000; i++) {
             String aiFirstMove = aiFirst.getMove();
             String aiSecondMove = aiSecond.getMove();
 
