@@ -39,7 +39,7 @@ public class RpsAi {
     /**
      * Get AI's move. Uses three private sub methods.
      *
-     * @return AI's move.
+     * @return AI's move as String.
      */
     public String getMove() {
 
@@ -57,8 +57,8 @@ public class RpsAi {
         }
     }
 
-    //Return the opposite of what predicted
     private String getHistoryBasedMove(int move) {
+        //Return opposite of what is predicted.
         if (move == 0) {
             return "P";
         } else if (move == 1) {
@@ -71,7 +71,7 @@ public class RpsAi {
     /**
      * Returns move based on markov chain.
      *
-     * @return move as string.
+     * @return AI's move as string.
      */
     public String getMarkovBasedMove() {
         float rndFloat;
@@ -89,9 +89,9 @@ public class RpsAi {
     }
 
     /**
-     * Gets random based move.
+     * Get random based move.
      *
-     * @return move as string.
+     * @return AI's move as string.
      */
     public String getRandomMove() {
         int rndInt;
@@ -109,8 +109,8 @@ public class RpsAi {
 
     /**
      * Check move history and return the move that opponent would most likely
-     * play based on the history.
-     *
+     * play based on the history. This is done by checking what player chose most
+     * often after certain sequence (last n moves) in move history.
      * @param n as length of sequence to be checked.
      * @return move as integer.
      */
@@ -140,9 +140,8 @@ public class RpsAi {
     }
 
     /**
-     * return biggest number out of array.
-     *
-     * @param timesPlayed
+     * Return biggest number out of array.
+     * @param timesPlayed array of moves and how many times each played.
      * @return biggest move as integer.
      */
     private int biggest(int[] timesPlayed) {
@@ -162,7 +161,7 @@ public class RpsAi {
     /**
      * Take opponent's previous move and update markov chain and move list.
      *
-     * @param move opponent's move.
+     * @param move opponent's move as String.
      */
     public void updateData(String move) {
         this.roundsPlayed++;
@@ -206,11 +205,6 @@ public class RpsAi {
         this.loosesInRow++;
     }
 
-    /**
-     * Get move list of opponent's moves.
-     *
-     * @return moves.
-     */
     public DynamicArray getMoves() {
         return this.oppMoves;
     }

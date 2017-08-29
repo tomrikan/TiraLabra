@@ -25,8 +25,8 @@ public class Player {
 
     /**
      * Check user move. Valid moves are
-     * rock, paper and scissors.
-     *
+     * r for rock, p for paper, s for scissors and quit.
+     * @param move player's move as String.
      * @return true if valid, false if not.
      */
     public Boolean checkMove(String move) {
@@ -48,5 +48,4 @@ public class Player {
     public void raiseScore() {
         this.score++;
     }
-
 }

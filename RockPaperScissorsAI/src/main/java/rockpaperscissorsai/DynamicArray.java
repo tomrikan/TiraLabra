@@ -36,7 +36,7 @@ public class DynamicArray {
     /**
      * Check that input index is within range.
      *
-     * @param index
+     * @param index index to be checked.
      */
     private void rangeCheck(int index) {
         if (index >= size || index < 0) {
@@ -48,7 +48,7 @@ public class DynamicArray {
     /**
      * Get index.
      *
-     * @param index
+     * @param index index to get.
      * @return index as integer.
      */
     public int get(int index) {
@@ -59,7 +59,7 @@ public class DynamicArray {
     /**
      * Increase capacity if necessary to hold enough elements.
      *
-     * @param minCapacity
+     * @param minCapacity as integer.
      */
     public void ensureCapacity(int minCapacity) {
         int oldCapacity = data.length;
@@ -75,7 +75,7 @@ public class DynamicArray {
     /**
      * Add element to end of array.
      *
-     * @param element
+     * @param element element to be added.
      * @return true if possible, false if not.
      */
     public boolean add(int element) {
@@ -91,8 +91,8 @@ public class DynamicArray {
     /**
      * Replace element at given index.
      *
-     * @param index
-     * @param element
+     * @param index index to be replaced.
+     * @param element element that will replace the old.
      * @return old value as integer.
      */
     public int set(int index, int element) {

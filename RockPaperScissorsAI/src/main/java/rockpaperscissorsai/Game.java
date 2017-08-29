@@ -8,15 +8,16 @@ package rockpaperscissorsai;
 import java.util.Scanner;
 
 /**
- * Class contains basic game functioning.
- *
+ * Class contains user interface and game logic.
+ * These should be actually in different classes
+ * but for this simple game and purpose of programming AI
+ * they are in same class this time.
  * @author tomi
  */
 public class Game {
 
     /**
-     * Create the game loop and basic functions. Take input from player and ai.
-     * Repeat until user chooses to quit. AI takes in player's move.
+     * Launch gameloop according to user's choice.
      */
     public static void main(String[] args) {
 
@@ -47,7 +48,7 @@ public class Game {
      *
      * @param playerMove player's move.
      * @param aiMove AI's move.
-     * @return winner.
+     * @return winner as integer.
      */
     static int roundWinner(String playerMove, String aiMove) {
         int winner;
@@ -71,7 +72,6 @@ public class Game {
 
     /**
      * Basic gameloop for human vs AI.
-     *
      * @param scanner as Scanner.
      */
     public static void gameLoop(Scanner scanner) {
